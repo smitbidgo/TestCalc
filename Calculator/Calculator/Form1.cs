@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using AnalaizerClass;
+using CalcClas;
 
 namespace Calculator
 {
