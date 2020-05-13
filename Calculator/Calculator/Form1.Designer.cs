@@ -33,10 +33,10 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.buttonOpenShower = new System.Windows.Forms.Button();
-            this.buttonClosedShower = new System.Windows.Forms.Button();
-            this.Beckspace = new System.Windows.Forms.Button();
             this.buttonClir = new System.Windows.Forms.Button();
+            this.Beckspace = new System.Windows.Forms.Button();
+            this.buttonClosedShower = new System.Windows.Forms.Button();
+            this.buttonOpenShower = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
@@ -107,16 +107,28 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Editing";
             // 
-            // buttonOpenShower
+            // buttonClir
             // 
-            this.buttonOpenShower.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonOpenShower.Location = new System.Drawing.Point(7, 20);
-            this.buttonOpenShower.Name = "buttonOpenShower";
-            this.buttonOpenShower.Size = new System.Drawing.Size(48, 38);
-            this.buttonOpenShower.TabIndex = 0;
-            this.buttonOpenShower.Text = "(";
-            this.buttonOpenShower.UseVisualStyleBackColor = true;
-            this.buttonOpenShower.Click += new System.EventHandler(this.buttonOpenShower_Click);
+            this.buttonClir.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonClir.ForeColor = System.Drawing.Color.Red;
+            this.buttonClir.Location = new System.Drawing.Point(275, 19);
+            this.buttonClir.Name = "buttonClir";
+            this.buttonClir.Size = new System.Drawing.Size(50, 39);
+            this.buttonClir.TabIndex = 3;
+            this.buttonClir.Text = "C";
+            this.buttonClir.UseVisualStyleBackColor = true;
+            this.buttonClir.Click += new System.EventHandler(this.buttonClir_Click);
+            // 
+            // Beckspace
+            // 
+            this.Beckspace.ForeColor = System.Drawing.Color.Red;
+            this.Beckspace.Location = new System.Drawing.Point(172, 19);
+            this.Beckspace.Name = "Beckspace";
+            this.Beckspace.Size = new System.Drawing.Size(97, 38);
+            this.Beckspace.TabIndex = 2;
+            this.Beckspace.Text = "Beckspace";
+            this.Beckspace.UseVisualStyleBackColor = true;
+            this.Beckspace.Click += new System.EventHandler(this.Beckspace_Click);
             // 
             // buttonClosedShower
             // 
@@ -129,27 +141,16 @@
             this.buttonClosedShower.UseVisualStyleBackColor = true;
             this.buttonClosedShower.Click += new System.EventHandler(this.buttonClosedShower_Click);
             // 
-            // Beckspace
+            // buttonOpenShower
             // 
-            this.Beckspace.ForeColor = System.Drawing.Color.Red;
-            this.Beckspace.Location = new System.Drawing.Point(172, 19);
-            this.Beckspace.Name = "Beckspace";
-            this.Beckspace.Size = new System.Drawing.Size(97, 38);
-            this.Beckspace.TabIndex = 2;
-            this.Beckspace.Text = "Beckspace";
-            this.Beckspace.UseVisualStyleBackColor = true;
-            // 
-            // buttonClir
-            // 
-            this.buttonClir.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonClir.ForeColor = System.Drawing.Color.Red;
-            this.buttonClir.Location = new System.Drawing.Point(275, 19);
-            this.buttonClir.Name = "buttonClir";
-            this.buttonClir.Size = new System.Drawing.Size(50, 39);
-            this.buttonClir.TabIndex = 3;
-            this.buttonClir.Text = "C";
-            this.buttonClir.UseVisualStyleBackColor = true;
-            this.buttonClir.Click += new System.EventHandler(this.buttonClir_Click);
+            this.buttonOpenShower.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonOpenShower.Location = new System.Drawing.Point(7, 20);
+            this.buttonOpenShower.Name = "buttonOpenShower";
+            this.buttonOpenShower.Size = new System.Drawing.Size(48, 38);
+            this.buttonOpenShower.TabIndex = 0;
+            this.buttonOpenShower.Text = "(";
+            this.buttonOpenShower.UseVisualStyleBackColor = true;
+            this.buttonOpenShower.Click += new System.EventHandler(this.buttonOpenShower_Click);
             // 
             // button1
             // 
@@ -280,6 +281,7 @@
             this.buttonDiv.TabIndex = 18;
             this.buttonDiv.Text = "/";
             this.buttonDiv.UseVisualStyleBackColor = true;
+            this.buttonDiv.Click += new System.EventHandler(this.buttonDiv_Click);
             // 
             // buttonMult
             // 
@@ -291,6 +293,7 @@
             this.buttonMult.TabIndex = 19;
             this.buttonMult.Text = "*";
             this.buttonMult.UseVisualStyleBackColor = true;
+            this.buttonMult.Click += new System.EventHandler(this.buttonMult_Click);
             // 
             // buttonSub
             // 
@@ -302,6 +305,7 @@
             this.buttonSub.TabIndex = 20;
             this.buttonSub.Text = "-";
             this.buttonSub.UseVisualStyleBackColor = true;
+            this.buttonSub.Click += new System.EventHandler(this.buttonSub_Click);
             // 
             // buttonAdd
             // 
@@ -313,6 +317,7 @@
             this.buttonAdd.TabIndex = 21;
             this.buttonAdd.Text = "+";
             this.buttonAdd.UseVisualStyleBackColor = true;
+            this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
             // 
             // buttonMR
             // 
@@ -354,12 +359,13 @@
             this.buttonSum.TabIndex = 25;
             this.buttonSum.Text = "=";
             this.buttonSum.UseVisualStyleBackColor = true;
+            this.buttonSum.Click += new System.EventHandler(this.buttonSum_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(365, 357);
+            this.ClientSize = new System.Drawing.Size(361, 362);
             this.Controls.Add(this.buttonSum);
             this.Controls.Add(this.buttonMC);
             this.Controls.Add(this.buttonMAdd);
@@ -381,7 +387,6 @@
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox1);
-            this.ClientSize = new System.Drawing.Size(394, 417);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.textBox1);
