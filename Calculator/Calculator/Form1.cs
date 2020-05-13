@@ -13,7 +13,7 @@ namespace Calculator
 {
     public partial class Form1 : Form
     {
-        Analaizer analaizer = new Analaizer();
+        
         
         public Form1()
         {
@@ -83,6 +83,37 @@ namespace Calculator
         private void buttonClir_Click(object sender, EventArgs e)
         {
             textBox1.Clear();
+        }
+
+        private void buttonSum_Click(object sender, EventArgs e)
+        {
+           //потрібно метод Sum
+        }
+
+        private void Beckspace_Click(object sender, EventArgs e)
+        {
+            textBox1.Text = textBox1.Text.Remove(textBox1.Text.Length - 1);
+
+        }
+
+        private void buttonDiv_Click(object sender, EventArgs e)
+        {
+            textBox1.Text += "/";
+        }
+
+        private void buttonMult_Click(object sender, EventArgs e)
+        {
+            textBox1.Text += "*";
+        }
+
+        private void buttonSub_Click(object sender, EventArgs e)
+        {
+            textBox1.Text += "-";
+        }
+
+        private void buttonAdd_Click(object sender, EventArgs e)
+        {
+            textBox1.Text += "+";
         }
     }
 }

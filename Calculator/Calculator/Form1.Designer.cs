@@ -128,6 +128,7 @@
             this.Beckspace.TabIndex = 2;
             this.Beckspace.Text = "Beckspace";
             this.Beckspace.UseVisualStyleBackColor = true;
+            this.Beckspace.Click += new System.EventHandler(this.Beckspace_Click);
             // 
             // buttonClosedShower
             // 
@@ -280,6 +281,7 @@
             this.buttonDiv.TabIndex = 18;
             this.buttonDiv.Text = "/";
             this.buttonDiv.UseVisualStyleBackColor = true;
+            this.buttonDiv.Click += new System.EventHandler(this.buttonDiv_Click);
             // 
             // buttonMult
             // 
@@ -291,6 +293,7 @@
             this.buttonMult.TabIndex = 19;
             this.buttonMult.Text = "*";
             this.buttonMult.UseVisualStyleBackColor = true;
+            this.buttonMult.Click += new System.EventHandler(this.buttonMult_Click);
             // 
             // buttonSub
             // 
@@ -302,6 +305,7 @@
             this.buttonSub.TabIndex = 20;
             this.buttonSub.Text = "-";
             this.buttonSub.UseVisualStyleBackColor = true;
+            this.buttonSub.Click += new System.EventHandler(this.buttonSub_Click);
             // 
             // buttonAdd
             // 
@@ -313,6 +317,7 @@
             this.buttonAdd.TabIndex = 21;
             this.buttonAdd.Text = "+";
             this.buttonAdd.UseVisualStyleBackColor = true;
+            this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
             // 
             // buttonMR
             // 
@@ -354,6 +359,7 @@
             this.buttonSum.TabIndex = 25;
             this.buttonSum.Text = "=";
             this.buttonSum.UseVisualStyleBackColor = true;
+            this.buttonSum.Click += new System.EventHandler(this.buttonSum_Click);
             // 
             // Form1
             // 
