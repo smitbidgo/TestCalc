@@ -32,21 +32,26 @@ namespace CalcClas
 
 
 
-
-
         public static double Mod(double a, double b)
         {
             return a % b;
         }
 
+
         public static double ABS(double a)
         {
-            return '+';
+            if (a > 0)
+                return a;
+
+            return -a;
         }
 
         public static double IABS(double a)
         {
-            return '-';
+            if (a > 0)
+                return -a;
+
+            return a;
         }
 
 
