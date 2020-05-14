@@ -14,5 +14,22 @@ namespace CalcClas
         }
 
 
+        public static double Sub(double a, double b)
+        {
+            return a - b;
+        }
+
+        public static double Mult(double a, double b)
+        {
+            return a * b;
+        }
+
+        public static double Div(double a, double b)
+        {
+            return a / b;
+        }
+
+
+
     }
 }
