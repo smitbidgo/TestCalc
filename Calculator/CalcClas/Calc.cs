@@ -31,5 +31,25 @@ namespace CalcClas
 
 
 
+
+
+
+        public static double Mod(double a, double b)
+        {
+            return a % b;
+        }
+
+        public static double ABS(double a)
+        {
+            return '+';
+        }
+
+        public static double IABS(double a)
+        {
+            return '-';
+        }
+
+
+
     }
 }
