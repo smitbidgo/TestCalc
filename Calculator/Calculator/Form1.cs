@@ -91,9 +91,15 @@ namespace Calculator
             Analaizer.expression = textBox1.Text;
             if(!Analaizer.CheckCurrency())
                 MessageBox.Show(CalcClas.Calculator.lastError);
+
             if (Analaizer.Format() == CalcClas.Calculator.lastError)
                 MessageBox.Show(CalcClas.Calculator.lastError);
             else Analaizer.expression = Analaizer.Format();
+
+
+            if (Analaizer.CreateStack() == null)
+                MessageBox.Show(CalcClas.Calculator.lastError);
+            else Analaizer.RunEstimate(Analaizer.CreateStack());
         }
     }
 }

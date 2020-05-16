@@ -44,6 +44,7 @@ namespace CalcClas
                     break;
                 case ErrorCodes.UnknownOperator:
                     lastError = $"Error 02 at {i} — Невідомий оператор на {i} символі.\n";
+                    
                     break;
                 case ErrorCodes.SyntaxError:
                     lastError = "Error 03 — Невірна синтаксична конструкція вхідного виразу.\n";
