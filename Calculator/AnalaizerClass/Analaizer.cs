@@ -65,6 +65,53 @@ namespace AnalaizerClass
                 Calculator.writeError(ErrorCodes.ExpressionCharLenError);
                 return "& " + Calculator.lastError;
             }
+            string formatted_expression = "";
+            string single_char_operators = "()+-*/pm"; // m може бути початком mod, але mod провіряється раніше
+            for (int i = 0; i < expression.Length; i++)
+            {
+                if (char.IsNumber(expression, i))
+                {
+                    while (char.IsNumber(expression, i))
+                    {
+                        formatted_expression = formatted_expression + expression.Substring(i, 1);
+                        i++;
+                    }
+                    i--;
+                    formatted_expression = formatted_expression + " ";
+                }
+                else if (i < expression.Length - 2 && expression.Substring(i, 3) == "mod")
+                {
+                    formatted_expression = formatted_expression + "mod ";
+                    i += 2; // перескакування через "od" в операторі "mod"
+                }
+                else if (single_char_operators.Contains(expression.Substring(i, 1)))
+                {
+                    formatted_expression = formatted_expression + expression.Substring(i, 1) + " ";
+                }
+                else if (expression.Substring(i, 1) == " ")
+                {
+                    // пропуск всіх пробілів
+                    while (expression.Substring(i, 1) == " ")
+                    {
+                        i++;
+                    }
+                    i--;
+                }
+                else
+                {
+                    erposition = i;
+                    Calculator.writeError(ErrorCodes.UnknownOperator, erposition);
+                    return "& " + Calculator.lastError;
+                }
+            }
+            // видалення пробілу в кінці виразу
+            expression = formatted_expression.Substring(0, formatted_expression.Length - 1);
+
+            if (expression.Length > 65536)
+            {
+                Calculator.writeError(ErrorCodes.ExpressionCharLenError);
+                return "& " + Calculator.lastError;
+            }
             return expression;
         }
         public static System.Collections.ArrayList CreateStack(string input)

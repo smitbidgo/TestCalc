@@ -155,7 +155,7 @@ namespace CalcClas
             }
             return (double)result;
         }
-        // унарний плюс (символ «+/-»)
+        // унарний плюс (символ «p»)
         public static double ABS(double a)
         {
             double result = a + 1;
@@ -166,7 +166,7 @@ namespace CalcClas
             return (double)result;
         }
 
-        // унарный минус (символ «+/-»)
+        // унарный минус (символ «m»)
         public static double IABS(double a)
         {
             double result = a - 1;
