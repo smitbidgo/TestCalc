@@ -85,5 +85,12 @@ namespace Calculator
         {
             textBox1.Clear();
         }
+
+        private void buttonSum_Click(object sender, EventArgs e)
+        {
+            Analaizer.expression = textBox1.Text;
+            if(!Analaizer.CheckCurrency())
+                MessageBox.Show(CalcClas.Calculator.lastError);
+        }
     }
 }

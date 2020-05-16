@@ -354,6 +354,7 @@
             this.buttonSum.TabIndex = 25;
             this.buttonSum.Text = "=";
             this.buttonSum.UseVisualStyleBackColor = true;
+            this.buttonSum.Click += new System.EventHandler(this.buttonSum_Click);
             // 
             // Form1
             // 
