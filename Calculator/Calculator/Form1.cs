@@ -117,7 +117,7 @@ namespace Calculator
             textBox1.Text += "+";
         }
 
-        private void buttonSum_Click(object sender, EventArgs e)
+        private void ButtonSum_Click(object sender, EventArgs e)
         {
             Analaizer.expression = textBox1.Text;
             if(!Analaizer.CheckCurrency())
