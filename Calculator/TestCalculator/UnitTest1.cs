@@ -7,14 +7,12 @@ namespace TestCalculator
     [TestClass]
     public class UnitTest1
     {
+      
         [TestMethod]
-        public void Format_DoubleOperator_Error04Returned()
+        public void Format_UnknownOperator_Error02Returned()
         {
-            Analaizer.expression = "(10++2)";
-            Assert.AreEqual(Analaizer.expression.Substring(0, "Error 04".Length), "Error 04");
+            Analaizer.expression = "(10$2)";
+            Assert.AreEqual(Analaizer.Format(),Calculator.lastError);
         }
-       
-        
-       
     }
 }

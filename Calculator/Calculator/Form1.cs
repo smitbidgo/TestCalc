@@ -109,12 +109,17 @@ namespace Calculator
         {
             textBox1.Text += "mod";
         }
-
         private void button11_Click(object sender, EventArgs e)
         {
-            if (textBox1.Text == ""|| textBox1.Text.Substring(textBox1.Text.Length - 1, 1) == "m")
-                textBox1.Text += "p";
             
+            //if (textBox1.Text == ""|| textBox1.Text.Substring(textBox1.Text.Length - 1, 1) == "m")
+            //    textBox1.Text += "p";
+            
+            if (textBox1.Text[0] == '-')
+                textBox1.Text = textBox1.Text.Remove(0, 1);
+            else
+                textBox1.Text = "-" + textBox1.Text;
+
         }
 
         private void Beckspace_Click(object sender, EventArgs e)
