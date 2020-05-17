@@ -102,7 +102,7 @@ namespace Calculator
 
             if (Analaizer.CreateStack() == null)
                 MessageBox.Show(CalcClas.Calculator.lastError);
-            else Analaizer.RunEstimate(Analaizer.CreateStack());
+            else label3.Text=Analaizer.RunEstimate(Analaizer.CreateStack());
         }
 
         private void buttonMod_Click(object sender, EventArgs e)
@@ -114,19 +114,7 @@ namespace Calculator
         {
             if (textBox1.Text == ""|| textBox1.Text.Substring(textBox1.Text.Length - 1, 1) == "m")
                 textBox1.Text += "p";
-            else
-            if (textBox1.Text.Substring(textBox1.Text.Length - 1, 1) == "p" ||
-                textBox1.Text.Substring(textBox1.Text.Length - 1, 1) == "m")
-            {
-                textBox1.Text = textBox1.Text.Remove(textBox1.Text.Length - 1);
-                textBox1.Text += "m";
-            }
-            else
-            if (textBox1.Text.Substring(textBox1.Text.Length - 1, 1) == "p")
-            {
-                textBox1.Text = textBox1.Text.Remove(textBox1.Text.Length - 1);
-                textBox1.Text += "m";
-            }
+            
         }
 
         private void Beckspace_Click(object sender, EventArgs e)

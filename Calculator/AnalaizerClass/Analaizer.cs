@@ -248,9 +248,90 @@ namespace AnalaizerClass
             return result;
         }
 
-        public static string RunEstimate(ArrayList array)
+        public static string RunEstimate(ArrayList rev_polish_notation)
         {
-            return null;
+            Stack<string> stack = new Stack<string>();
+            double _ = 0; // змінна просто потрібна для роботи int.TryParse
+            double a = 0, b = 0;
+
+            foreach (string item in rev_polish_notation)
+            {
+                if (ShowMessage)
+                {
+                    return Calculator.lastError;
+                }
+
+                if (double.TryParse(item, out _))
+                {
+                    stack.Push(item);
+                }
+                else if (item == "m" || item == "p")
+                {
+                    if (!double.TryParse(stack.Pop(), out a))
+                    {
+                        // чисто на всякий пожежний, хоча по ідеї мало би все спрацювати, якщо попередні провірки на помилки пройшли вдало
+                        erposition = -9990; /// просто щоб легше було знайти нестиковку в коді відразу
+                        Calculator.writeError(ErrorCodes.UnknownOperator, erposition);
+                        return Calculator.lastError;
+                    }
+
+                    switch (item)
+                    {
+                        case "p":
+                            stack.Push(Calculator.ABS(a).ToString());
+                            break;
+                        case "m":
+                            stack.Push(Calculator.IABS(a).ToString());
+                            break;
+                        default:
+                            erposition = -9991; /// просто щоб легше було знайти нестиковку в коді відразу
+                            Calculator.writeError(ErrorCodes.UnknownOperator, erposition);
+                            return Calculator.lastError;
+                    }
+                }
+                else
+                {
+                    if (!double.TryParse(stack.Pop(), out a) ||
+                        !double.TryParse(stack.Pop(), out b))
+                    {
+                        // чисто на всякий пожежний, хоча по ідеї мало би все спрацювати, якщо попередні провірки на помилки пройшли вдало
+                        erposition = -9992; /// просто щоб легше було знайти нестиковку в коді відразу
+                        Calculator.writeError(ErrorCodes.UnknownOperator, erposition);
+                        return Calculator.lastError;
+                    }
+                    switch (item)
+                    {
+                        case "+":
+                            stack.Push(Calculator.Add(a, b).ToString());
+                            break;
+                        case "-":
+                            stack.Push(Calculator.Sub(a, b).ToString());
+                            break;
+                        case "*":
+                            stack.Push(Calculator.Mult(a, b).ToString());
+                            break;
+                        case "/":
+                            stack.Push(Calculator.Div(a, b).ToString());
+                            break;
+                        case "mod":
+                            stack.Push(Calculator.Mod(a, b).ToString());
+                            break;
+                        default:
+                            erposition = -9993; /// просто щоб легше було знайти нестиковку в коді відразу
+                            Calculator.writeError(ErrorCodes.UnknownOperator, erposition);
+                            return Calculator.lastError;
+                    }
+                }
+            }
+
+            if (stack.Count != 1)
+            {
+                erposition = -9994; /// просто щоб легше було знайти нестиковку в коді відразу
+                Calculator.writeError(ErrorCodes.UnknownOperator, erposition);
+                return Calculator.lastError;
+            }
+
+            return stack.Pop();
         }
 
         //public static string Estimate(string str)
