@@ -13,7 +13,7 @@ namespace AnalaizerClass
         /// (у випадку відловлення на рівні виконання - не визначається)
         private static int erposition = 0;
         /// Вхідний вираз
-        public static string expression = "";
+        public static string expression = null;
         /// Показує, чи є необхідність у виведенні повідомлень про помилки. 
         /// У разі консольного запуску програми це значення - false.
         public static bool ShowMessage
@@ -63,7 +63,7 @@ namespace AnalaizerClass
             if (expression.Length > 65536)
             {
                 Calculator.writeError(ErrorCodes.ExpressionCharLenError);
-                return "& " + Calculator.lastError;
+                return Calculator.lastError;
             }
             string formatted_expression = "";
             string single_char_operators = "()+-*/pm"; // m може бути початком mod, але mod провіряється раніше
@@ -71,10 +71,12 @@ namespace AnalaizerClass
             {
                 if (char.IsNumber(expression, i))
                 {
-                    while (char.IsNumber(expression, i))
+                  while (char.IsNumber(expression, i))
                     {
                         formatted_expression = formatted_expression + expression.Substring(i, 1);
                         i++;
+                        if (i == expression.Length) break;
+                       
                     }
                     i--;
                     formatted_expression = formatted_expression + " ";
@@ -82,7 +84,7 @@ namespace AnalaizerClass
                 else if (i < expression.Length - 2 && expression.Substring(i, 3) == "mod")
                 {
                     formatted_expression = formatted_expression + "mod ";
-                    i += 2; // перескакування через "od" в операторі "mod"
+                    i += 2; // перескакування через "mod" в операторі "mod"
                 }
                 else if (single_char_operators.Contains(expression.Substring(i, 1)))
                 {
@@ -102,7 +104,7 @@ namespace AnalaizerClass
                 {
                     erposition = i;
                     Calculator.writeError(ErrorCodes.UnknownOperator, erposition);
-                    return "& " + Calculator.lastError;
+                    return Calculator.lastError;
                 }
             }
             // видалення пробілу в кінці виразу
@@ -111,7 +113,7 @@ namespace AnalaizerClass
             if (expression.Length > 65536)
             {
                 Calculator.writeError(ErrorCodes.ExpressionCharLenError);
-                return "& " + Calculator.lastError;
+                return Calculator.lastError;
             }
             return expression;
         }
@@ -246,9 +248,90 @@ namespace AnalaizerClass
             return result;
         }
 
-        public static string RunEstimate(ArrayList array)
+        public static string RunEstimate(ArrayList rev_polish_notation)
         {
-            return null;
+            Stack<string> stack = new Stack<string>();
+            double _ = 0; // змінна просто потрібна для роботи int.TryParse
+            double a = 0, b = 0;
+
+            foreach (string item in rev_polish_notation)
+            {
+                if (ShowMessage)
+                {
+                    return Calculator.lastError;
+                }
+
+                if (double.TryParse(item, out _))
+                {
+                    stack.Push(item);
+                }
+                else if (item == "m" || item == "p")
+                {
+                    if (!double.TryParse(stack.Pop(), out a))
+                    {
+                        // чисто на всякий пожежний, хоча по ідеї мало би все спрацювати, якщо попередні провірки на помилки пройшли вдало
+                        erposition = -9990; /// просто щоб легше було знайти нестиковку в коді відразу
+                        Calculator.writeError(ErrorCodes.UnknownOperator, erposition);
+                        return Calculator.lastError;
+                    }
+
+                    switch (item)
+                    {
+                        case "p":
+                            stack.Push(Calculator.ABS(a).ToString());
+                            break;
+                        case "m":
+                            stack.Push(Calculator.IABS(a).ToString());
+                            break;
+                        default:
+                            erposition = -9991; /// просто щоб легше було знайти нестиковку в коді відразу
+                            Calculator.writeError(ErrorCodes.UnknownOperator, erposition);
+                            return Calculator.lastError;
+                    }
+                }
+                else
+                {
+                    if (!double.TryParse(stack.Pop(), out a) ||
+                        !double.TryParse(stack.Pop(), out b))
+                    {
+                        // чисто на всякий пожежний, хоча по ідеї мало би все спрацювати, якщо попередні провірки на помилки пройшли вдало
+                        erposition = -9992; /// просто щоб легше було знайти нестиковку в коді відразу
+                        Calculator.writeError(ErrorCodes.UnknownOperator, erposition);
+                        return Calculator.lastError;
+                    }
+                    switch (item)
+                    {
+                        case "+":
+                            stack.Push(Calculator.Add(a, b).ToString());
+                            break;
+                        case "-":
+                            stack.Push(Calculator.Sub(a, b).ToString());
+                            break;
+                        case "*":
+                            stack.Push(Calculator.Mult(a, b).ToString());
+                            break;
+                        case "/":
+                            stack.Push(Calculator.Div(a, b).ToString());
+                            break;
+                        case "mod":
+                            stack.Push(Calculator.Mod(a, b).ToString());
+                            break;
+                        default:
+                            erposition = -9993; /// просто щоб легше було знайти нестиковку в коді відразу
+                            Calculator.writeError(ErrorCodes.UnknownOperator, erposition);
+                            return Calculator.lastError;
+                    }
+                }
+            }
+
+            if (stack.Count != 1)
+            {
+                erposition = -9994; /// просто щоб легше було знайти нестиковку в коді відразу
+                Calculator.writeError(ErrorCodes.UnknownOperator, erposition);
+                return Calculator.lastError;
+            }
+
+            return stack.Pop();
         }
 
         //public static string Estimate(string str)

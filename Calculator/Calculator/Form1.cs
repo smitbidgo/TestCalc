@@ -84,29 +84,45 @@ namespace Calculator
         private void buttonClir_Click(object sender, EventArgs e)
         {
             textBox1.Clear();
+            label3.Text = "";
         }
 
         private void buttonSum_Click(object sender, EventArgs e)
         {
             Analaizer.expression = textBox1.Text;
+
+            
             if (!Analaizer.CheckCurrency())
                 MessageBox.Show(CalcClas.Calculator.lastError);
 
             if (Analaizer.Format() == CalcClas.Calculator.lastError)
                 MessageBox.Show(CalcClas.Calculator.lastError);
-            else Analaizer.expression = Analaizer.Format();
+
 
 
             if (Analaizer.CreateStack() == null)
                 MessageBox.Show(CalcClas.Calculator.lastError);
-            else Analaizer.RunEstimate(Analaizer.CreateStack());
+            else label3.Text=Analaizer.RunEstimate(Analaizer.CreateStack());
+        }
+
+        private void buttonMod_Click(object sender, EventArgs e)
+        {
+            textBox1.Text += "mod";
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            if (textBox1.Text == ""|| textBox1.Text.Substring(textBox1.Text.Length - 1, 1) == "m")
+                textBox1.Text += "p";
+            
         }
 
         private void Beckspace_Click(object sender, EventArgs e)
         {
-            textBox1.Text = textBox1.Text.Remove(textBox1.Text.Length - 1);
-
+            textBox1.Text=textBox1.Text.Remove(textBox1.Text.Length - 1);
         }
+
+       
 
         private void buttonDiv_Click(object sender, EventArgs e)
         {
