@@ -134,11 +134,7 @@ namespace Calculator
             textBox1.Text=textBox1.Text.Remove(textBox1.Text.Length - 1);
         }
 
-        private void Beckspace_Click(object sender, EventArgs e)
-        {
-            textBox1.Text = textBox1.Text.Remove(textBox1.Text.Length - 1);
-
-        }
+       
 
         private void buttonDiv_Click(object sender, EventArgs e)
         {
