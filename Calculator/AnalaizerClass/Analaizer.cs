@@ -97,6 +97,7 @@ namespace AnalaizerClass
                     }
                     i--;
                 }
+                //перевірка коли Невідомий оператор
                 else
                 {
                     erposition = i;
@@ -106,7 +107,7 @@ namespace AnalaizerClass
             }
             // видалення пробілу в кінці виразу
             expression = formatted_expression.Substring(0, formatted_expression.Length - 1);
-
+            //перевірка коли Максмальная довжина — 65536 символів.
             if (expression.Length > 65536)
             {
                 Calculator.writeError(ErrorCodes.ExpressionCharLenError);
@@ -114,24 +115,149 @@ namespace AnalaizerClass
             }
             return expression;
         }
-        public static System.Collections.ArrayList CreateStack(string input)
+        /// Формує  масив, в якому розташовуються оператори і символи представлені в зворотному польському записі (без дужок)
+        /// На цьому ж етапі відшукується решта всіх помилок (див. код). По суті - це компіляція.
+        ///  <returns>массив зворотнього польського запису</returns>
+        public static System.Collections.ArrayList CreateStack()
         {
-            ArrayList output = null;
-            return output;
+            string[] expression_ar = expression.Split(' ');
+            //перевірка коли Сумарна кількість чисел і операторів перевищує 30.
+            if (expression_ar.Length > 30)
+            {
+                Calculator.writeError(ErrorCodes.TooManyElements);
+                return null;
+            }
+
+            string item = "";
+            System.Collections.ArrayList result = new System.Collections.ArrayList();
+            Stack<string> stack = new Stack<string>();
+            double _ = 0; // змінна просто потрібна для роботи double.TryParse
+            for (int i = 0; i < expression_ar.Length; i++)
+            {
+                item = expression_ar[i];
+
+                if (double.TryParse(item, out _))
+                {
+                    result.Add(item);
+                }
+                else if (item == "m" || item == "p")
+                {
+                    // якщо оператор знаходиться перед закриваючою дужкою
+                    if (expression_ar[i + 1] == ")")
+                    {
+                        //перевірка коли Невірна синтаксична конструкція вхідного виразу
+                        Calculator.writeError(ErrorCodes.SyntaxError);
+                        return null;
+                    }
+
+                    // якщо два оператори підряд
+                    if (expression_ar[i + 1] == "m" || expression_ar[i + 1] == "p")
+                    {
+                        erposition = i;
+                        //перевірка коли Два підряд оператори
+                        Calculator.writeError(ErrorCodes.DoubleOperator, erposition);
+                        return null;
+                    }
+
+                    // якщо це кінець виразу
+                    if (i == expression_ar.Length - 1)
+                    {
+                        //перевірка коли Незавершений вираз
+                        Calculator.writeError(ErrorCodes.UnfinishedExpression);
+                        return null;
+                    }
+
+                    stack.Push(item);
+                }
+                else if (item == "(")
+                {
+                    // якщо пусті дужки "()"
+                    if (expression_ar[i + 1] == ")")
+                    {
+                        //перевірка коли Невірна синтаксична конструкція вхідного виразу
+                        Calculator.writeError(ErrorCodes.SyntaxError);
+                        return null;
+                    }
+
+                    // якщо бінарний оператор після відкриваючої дужки
+                    if ("+-*/".Contains(expression_ar[i + 1]) || expression_ar[i + 1] == "mod")
+                    {
+                        //перевірка коли Невірна синтаксична конструкція вхідного виразу
+                        Calculator.writeError(ErrorCodes.SyntaxError);
+                        return null;
+                    }
+
+                    stack.Push(item);
+                }
+                else if (item == ")")
+                {
+                    while (stack.Count > 0 && stack.Peek() != "(")
+                    {
+                        result.Add(stack.Pop());
+                    }
+                    
+                    if (stack.Peek() == "(")
+                    {
+                        stack.Pop();
+                    }
+                }
+                else if ("+-*/".Contains(item) || item == "mod")
+                {
+                    // якщо це кінець виразу
+                    if (i == expression_ar.Length - 1)
+                    {
+                        //перевірка коли Незавершений вираз
+                        Calculator.writeError(ErrorCodes.UnfinishedExpression);
+                        return null;
+                    }
+
+                    // якщо перед бінарним оператором немає числа, або закриваючої дужки
+                    if (i == 0 ||(expression_ar[i - 1] != ")" && !double.TryParse(expression_ar[i - 1], out _)))
+                    {
+                        //перевірка коли Невірна синтаксична конструкція вхідного виразу
+                        Calculator.writeError(ErrorCodes.SyntaxError);
+                        return null;
+                    }
+
+                    // якщо два бінарних оператори підряд
+                    if ("+-*/".Contains(expression_ar[i + 1]) || expression_ar[i + 1] == "mod")
+                    {
+                        erposition = i;
+                        //перевірка коли Два підряд оператори
+                        Calculator.writeError(ErrorCodes.DoubleOperator, erposition);
+                        return null;
+                    }
+
+                    // якщо оператор знаходиться перед закриваючою дужкою
+                    if (expression_ar[i + 1] == ")")
+                    {
+                        //перевірка коли Невірна синтаксична конструкція вхідного виразу
+                        Calculator.writeError(ErrorCodes.SyntaxError);
+                        return null;
+                    }
+
+                    while (stack.Count > 0 &&(stack.Peek() == "m" || stack.Peek() == "p"))
+                    {
+                        result.Add(stack.Pop());
+                    }
+                    stack.Push(item);
+                }
+            }
+            return result;
         }
 
-        public static string RunEstimate(string input)
+        public static string RunEstimate(ArrayList array)
         {
-            return input;
+            return null;
         }
 
-        public static string Estimate(string str)
-        {
-            CheckCurrency();
-            //expression=Format(str);
-            expression = (CreateStack(expression)).ToString();
-            return RunEstimate(expression);
+        //public static string Estimate(string str)
+        //{
+        //    //CheckCurrency();
+        //    //expression=Format(str);
+        //    //expression = (CreateStack(expression)).ToString();
+        //    //return RunEstimate(expression);
 
-        }
+        //}
     }
 }
