@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using AnalaizerClass;
+using CalcClas;
 
 namespace Calculator
 {
@@ -87,7 +88,18 @@ namespace Calculator
 
         private void buttonSum_Click(object sender, EventArgs e)
         {
-           //потрібно метод Sum
+            Analaizer.expression = textBox1.Text;
+            if (!Analaizer.CheckCurrency())
+                MessageBox.Show(CalcClas.Calculator.lastError);
+
+            if (Analaizer.Format() == CalcClas.Calculator.lastError)
+                MessageBox.Show(CalcClas.Calculator.lastError);
+            else Analaizer.expression = Analaizer.Format();
+
+
+            if (Analaizer.CreateStack() == null)
+                MessageBox.Show(CalcClas.Calculator.lastError);
+            else Analaizer.RunEstimate(Analaizer.CreateStack());
         }
 
         private void Beckspace_Click(object sender, EventArgs e)
@@ -114,16 +126,6 @@ namespace Calculator
         private void buttonAdd_Click(object sender, EventArgs e)
         {
             textBox1.Text += "+";
-        }
-
-        private void ButtonSum_Click(object sender, EventArgs e)
-        {
-            Analaizer.expression = textBox1.Text;
-            if(!Analaizer.CheckCurrency())
-                MessageBox.Show(CalcClas.Calculator.lastError);
-            if (Analaizer.Format() == CalcClas.Calculator.lastError)
-                MessageBox.Show(CalcClas.Calculator.lastError);
-            else Analaizer.expression = Analaizer.Format();
         }
     }
 }
