@@ -36,7 +36,8 @@
     <Reference Include="AnalaizerClass">
       <HintPath>..\AnalaizerClass\bin\Debug\AnalaizerClass.dll</HintPath>
     </Reference>
-    <Reference Include="CalcClas">
+    <Reference Include="CalcClas, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\CalcClas\bin\Debug\CalcClas.dll</HintPath>
     </Reference>
     <Reference Include="System" />

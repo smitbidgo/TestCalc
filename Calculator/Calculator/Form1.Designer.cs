@@ -118,6 +118,25 @@
             this.buttonClir.Text = "C";
             this.buttonClir.UseVisualStyleBackColor = true;
             this.buttonClir.Click += new System.EventHandler(this.buttonClir_Click);
+            this.buttonClir.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonClir.ForeColor = System.Drawing.Color.Red;
+            this.buttonClir.Location = new System.Drawing.Point(275, 19);
+            this.buttonClir.Name = "buttonClir";
+            this.buttonClir.Size = new System.Drawing.Size(50, 39);
+            this.buttonClir.TabIndex = 3;
+            this.buttonClir.Text = "C";
+            this.buttonClir.UseVisualStyleBackColor = true;
+            this.buttonClir.Click += new System.EventHandler(this.buttonClir_Click);
+            // 
+            // Beckspace
+            // 
+            this.Beckspace.ForeColor = System.Drawing.Color.Red;
+            this.Beckspace.Location = new System.Drawing.Point(172, 19);
+            this.Beckspace.Name = "Beckspace";
+            this.Beckspace.Size = new System.Drawing.Size(97, 38);
+            this.Beckspace.TabIndex = 2;
+            this.Beckspace.Text = "Beckspace";
+            this.Beckspace.UseVisualStyleBackColor = true;
             // 
             // Beckspace
             // 
@@ -365,6 +384,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(455, 434);
             this.ClientSize = new System.Drawing.Size(361, 362);
             this.Controls.Add(this.buttonSum);
             this.Controls.Add(this.buttonMC);
