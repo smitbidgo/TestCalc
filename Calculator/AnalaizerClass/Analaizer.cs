@@ -13,7 +13,7 @@ namespace AnalaizerClass
         /// (у випадку відловлення на рівні виконання - не визначається)
         private static int erposition = 0;
         /// Вхідний вираз
-        public static string expression = "";
+        public static string expression = null;
         /// Показує, чи є необхідність у виведенні повідомлень про помилки. 
         /// У разі консольного запуску програми це значення - false.
         public static bool ShowMessage
@@ -63,7 +63,7 @@ namespace AnalaizerClass
             if (expression.Length > 65536)
             {
                 Calculator.writeError(ErrorCodes.ExpressionCharLenError);
-                return "& " + Calculator.lastError;
+                return Calculator.lastError;
             }
             string formatted_expression = "";
             string single_char_operators = "()+-*/pm"; // m може бути початком mod, але mod провіряється раніше
@@ -71,10 +71,12 @@ namespace AnalaizerClass
             {
                 if (char.IsNumber(expression, i))
                 {
-                    while (char.IsNumber(expression, i))
+                  while (char.IsNumber(expression, i))
                     {
                         formatted_expression = formatted_expression + expression.Substring(i, 1);
                         i++;
+                        if (i == expression.Length) break;
+                       
                     }
                     i--;
                     formatted_expression = formatted_expression + " ";
@@ -82,7 +84,7 @@ namespace AnalaizerClass
                 else if (i < expression.Length - 2 && expression.Substring(i, 3) == "mod")
                 {
                     formatted_expression = formatted_expression + "mod ";
-                    i += 2; // перескакування через "od" в операторі "mod"
+                    i += 2; // перескакування через "mod" в операторі "mod"
                 }
                 else if (single_char_operators.Contains(expression.Substring(i, 1)))
                 {
@@ -102,7 +104,7 @@ namespace AnalaizerClass
                 {
                     erposition = i;
                     Calculator.writeError(ErrorCodes.UnknownOperator, erposition);
-                    return "& " + Calculator.lastError;
+                    return Calculator.lastError;
                 }
             }
             // видалення пробілу в кінці виразу
@@ -111,7 +113,7 @@ namespace AnalaizerClass
             if (expression.Length > 65536)
             {
                 Calculator.writeError(ErrorCodes.ExpressionCharLenError);
-                return "& " + Calculator.lastError;
+                return Calculator.lastError;
             }
             return expression;
         }

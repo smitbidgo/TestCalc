@@ -128,6 +128,7 @@
             this.Beckspace.TabIndex = 2;
             this.Beckspace.Text = "Beckspace";
             this.Beckspace.UseVisualStyleBackColor = true;
+            this.Beckspace.Click += new System.EventHandler(this.Beckspace_Click);
             // 
             // buttonClosedShower
             // 
@@ -259,6 +260,7 @@
             this.button11.TabIndex = 16;
             this.button11.Text = "+/-";
             this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
             // buttonMod
             // 
@@ -269,6 +271,7 @@
             this.buttonMod.TabIndex = 17;
             this.buttonMod.Text = "mod";
             this.buttonMod.UseVisualStyleBackColor = true;
+            this.buttonMod.Click += new System.EventHandler(this.buttonMod_Click);
             // 
             // buttonDiv
             // 
