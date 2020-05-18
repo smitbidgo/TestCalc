@@ -14,12 +14,22 @@ namespace Calculator
 {
     public partial class Form1 : Form
     {
-        
-        
-        public Form1()
+
+        string memory;
+
+        public Form1(string []arr)
         {
             InitializeComponent();
-            
+            if (arr.Count() > 0)
+            {
+                foreach (var item in arr)
+                {
+                    textBox1.Text += item;
+                }
+                buttonSum_Click(null,null);
+
+            }
+            this.KeyPreview = true;
         }
         private void button1_Click(object sender, EventArgs e)
         {
@@ -89,6 +99,8 @@ namespace Calculator
 
         private void buttonSum_Click(object sender, EventArgs e)
         {
+            
+            
             Analaizer.expression = textBox1.Text;
 
             
@@ -114,6 +126,7 @@ namespace Calculator
         {
             if (textBox1.Text == ""|| textBox1.Text.Substring(textBox1.Text.Length - 1, 1) == "m")
                 textBox1.Text += "p";
+
             
         }
 
@@ -142,6 +155,21 @@ namespace Calculator
         private void buttonAdd_Click(object sender, EventArgs e)
         {
             textBox1.Text += "+";
+        }
+
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+
+
+            if (e.KeyCode == Keys.Escape)
+                this.Close();
+            
+            
+        }
+
+        private void textBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter) buttonSum_Click(this, EventArgs.Empty);
         }
     }
 }

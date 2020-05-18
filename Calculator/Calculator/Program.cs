@@ -12,11 +12,11 @@ namespace Calculator
         /// Главная точка входа для приложения.
         /// </summary>
         [STAThread]
-        static void Main()
+        static void Main(string[] arr)
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new Form1(arr));
         }
     }
 }

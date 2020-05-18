@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using CalcClas;
 namespace AnalaizerClass
 {
@@ -227,6 +228,7 @@ namespace AnalaizerClass
                         erposition = i;
                         //перевірка коли Два підряд оператори
                         Calculator.writeError(ErrorCodes.DoubleOperator, erposition);
+                        MessageBox.Show(CalcClas.Calculator.lastError);
                         return null;
                     }
 
@@ -314,7 +316,7 @@ namespace AnalaizerClass
                             stack.Push(Calculator.Div(a, b).ToString());
                             break;
                         case "mod":
-                            stack.Push(Calculator.Mod(a, b).ToString());
+                            stack.Push(Calculator.Mod(b,a).ToString());
                             break;
                         default:
                             erposition = -9993; /// просто щоб легше було знайти нестиковку в коді відразу
