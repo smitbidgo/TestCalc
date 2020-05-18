@@ -189,7 +189,7 @@ namespace AnalaizerClass
                         Calculator.writeError(ErrorCodes.SyntaxError);
                         return null;
                     }
-
+                    
                     stack.Push(item);
                 }
                 else if (item == ")")
@@ -239,7 +239,13 @@ namespace AnalaizerClass
                         Calculator.writeError(ErrorCodes.SyntaxError);
                         return null;
                     }
-
+                    // 
+                    if (expression_ar[i + 1] == "0"&& expression_ar[i]== "/")
+                    {
+                        //перевірка коли Невірна синтаксична конструкція вхідного виразу
+                        Calculator.writeError(ErrorCodes.ZeroDevisionError);
+                        return null;
+                    }
                     while (stack.Count > 0 &&(stack.Peek() == "m" || stack.Peek() == "p"))
                     {
                         result.Add(stack.Pop());
@@ -326,12 +332,12 @@ namespace AnalaizerClass
                 }
             }
 
-            if (stack.Count != 1)
-            {
-                erposition = -9994; /// просто щоб легше було знайти нестиковку в коді відразу
-                Calculator.writeError(ErrorCodes.UnknownOperator, erposition);
-                return Calculator.lastError;
-            }
+            //if (stack.Count != 1)
+            //{
+            //    erposition = -9994; /// просто щоб легше було знайти нестиковку в коді відразу
+            //    Calculator.writeError(ErrorCodes.UnknownOperator, erposition);
+            //    return Calculator.lastError;
+            //}
 
             return stack.Pop();
         }
